@@ -1,7 +1,7 @@
 import sbt._
 
 class PrefuseProject(info: ProjectInfo) extends ParentProject(info) {
-   lazy val core  = project("core", "prefuse", new Core(_))
+   lazy val core  = project("core", "prefuse-core", new Core(_))
    lazy val demos = project("demos", "prefuse-demos", new Demos(_), core)
       
    class Core(info: ProjectInfo) extends DefaultProject(info) {
@@ -24,9 +24,11 @@ class PrefuseProject(info: ProjectInfo) extends ParentProject(info) {
       override def disableCrossPaths = true
    }
 
-   def doNothing = task { None }
-   override def publishLocalAction = doNothing
-   override def deliverLocalAction = doNothing
-   override def publishAction = doNothing
-   override def deliverAction = doNothing
+   override def disableCrossPaths = true
+
+//   def doNothing = task { None }
+//   override def publishLocalAction = doNothing
+//   override def deliverLocalAction = doNothing
+//   override def publishAction = doNothing
+//   override def deliverAction = doNothing
 }

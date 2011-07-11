@@ -29,7 +29,7 @@ h3. linking
 
 If you develop a Scala project using sbt and want it to depend on Prefuse, you can now add the following line to your project file (sbt 0.7):
 
-pre. val prefuse = "de.sciss" % "prefuse" % "0.20"
+pre. val prefuse = "de.sciss" % "prefuse-core" % "0.20"
 
 h3. todo
 
