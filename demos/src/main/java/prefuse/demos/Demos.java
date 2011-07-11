@@ -46,7 +46,7 @@ public class Demos implements Runnable {
 				public void actionPerformed( ActionEvent e ) {
 					try {
 						final Method m = c.getMethod( "main", new Class[] { String[].class });
-						m.invoke( null, new Object[] { null });
+						m.invoke( null, new Object[] { new String[] {} });
 					} catch( Throwable e1 ) {
 						e1.printStackTrace();
 					}
