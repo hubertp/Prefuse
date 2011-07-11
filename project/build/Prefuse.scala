@@ -7,6 +7,8 @@ class PrefuseProject(info: ProjectInfo) extends ParentProject(info) {
    class Core(info: ProjectInfo) extends DefaultProject(info) {
       override def javaCompileOptions = super.javaCompileOptions ++ 
          javaCompileOptions("-Xlint:unchecked", "-source", "1.4")
+         
+      val junit = "junit" % "junit" % "3.8.1" % "test->default"
    }
 
    class Demos(info: ProjectInfo) extends DefaultProject(info) {

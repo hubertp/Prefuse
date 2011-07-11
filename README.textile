@@ -23,8 +23,9 @@ The following changes and refactorings have been applied on the original code as
 * several occurances of @AbstractTreeMap.Entry@ have been corrected in @prefuse.util.collections@ so javadoc doesn't choke on them
 * the @data@ folder was split into @demos/src/main/resources@ and @sample_data@
 * a demo selector class @prefuse.demos.Demos@ has been added. To run it: @sbt 'project demos' run@
+* @TreeTest@ has been modified so that it won't depend on the @TreeMap@ demo anymore (it has a copy of the data set now).
 
 h3. todo
 
 * It seems as if scaladoc does not fully work with the java sources. Although the class tree is properly build, the comments seem to have gone. This issue must be resolved in a future release.
-* The tests do not currently run (they should through @sbt test@). Probably the junit dependency is the only thing broken.
+* The JUnit 3 tests compile, but I don't know how to launch them. @sbt test@ does not seem to see them. If you are a JUnit expert and know how solve this issue, please get in touch.

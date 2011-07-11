@@ -13,7 +13,6 @@ import prefuse.data.Node;
 import prefuse.data.Tree;
 import prefuse.data.io.TreeMLReader;
 import prefuse.data.util.TreeNodeIterator;
-import prefuse.demos.TreeMap;
 import prefuse.util.GraphLib;
 import prefuse.util.ui.JPrefuseTable;
 
@@ -23,7 +22,7 @@ public class TreeTest extends TestCase {
     
     public void testTreeReader() {
         // load tree
-        URL url = TreeMap.class.getResource(TREE_CHI);
+        URL url = TreeTest.class.getResource(TREE_CHI);
         Tree t = null;
         try {
             GZIPInputStream gzin = new GZIPInputStream(url.openStream());
@@ -93,7 +92,7 @@ public class TreeTest extends TestCase {
     }
     
     public static void main(String[] argv) {
-        URL url = TreeMap.class.getResource(TREE_CHI);
+        URL url = TreeTest.class.getResource(TREE_CHI);
         Tree t = null;
         try {
             GZIPInputStream gzin = new GZIPInputStream(url.openStream());
