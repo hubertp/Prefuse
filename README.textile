@@ -25,6 +25,12 @@ The following changes and refactorings have been applied on the original code as
 * a demo selector class @prefuse.demos.Demos@ has been added. To run it: @sbt 'project demos' run@
 * @TreeTest@ has been modified so that it won't depend on the @TreeMap@ demo anymore (it has a copy of the data set now).
 
+h3. linking
+
+If you develop a Scala project using sbt and want it to depend on Prefuse, you can now add the following line to your project file (sbt 0.7):
+
+pre. val prefuse = "de.sciss" % "prefuse" % "0.20"
+
 h3. todo
 
 * It seems as if scaladoc does not fully work with the java sources. Although the class tree is properly build, the comments seem to have gone. This issue must be resolved in a future release.
