@@ -31,4 +31,20 @@ class PrefuseProject(info: ProjectInfo) extends ParentProject(info) {
 //   override def deliverLocalAction = doNothing
 //   override def publishAction = doNothing
 //   override def deliverAction = doNothing
+
+   // ---- publishing ----
+
+   override def managedStyle  = ManagedStyle.Maven
+   val publishTo              = "Scala Tools Nexus" at "http://nexus.scala-tools.org/content/repositories/releases/"
+
+   override def pomExtra =
+      <licenses>
+        <license>
+          <name>BSD License</name>
+          <url>http://prefuse.org/license-prefuse.txt</url>
+          <distribution>repo</distribution>
+        </license>
+      </licenses>
+
+   Credentials( Path.userHome / ".ivy2" / ".credentials", log )
 }
