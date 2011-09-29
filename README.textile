@@ -25,11 +25,15 @@ The following changes and refactorings have been applied on the original code as
 * a demo selector class @prefuse.demos.Demos@ has been added. To run it: @sbt 'project demos' run@
 * @TreeTest@ has been modified so that it won't depend on the @TreeMap@ demo anymore (it has a copy of the data set now).
 
+The following fixes have been incorporated
+
+* #3048039 Iterator bug in Dynamic Aggregate removal 
+
 h3. linking
 
 If you develop a Scala project using sbt and want it to depend on Prefuse, you can now add the following line to your project file (sbt 0.7):
 
-pre. val prefuse = "de.sciss" % "prefuse-core" % "0.20"
+pre. val prefuse = "de.sciss" % "prefuse-core" % "0.21"
 
 h3. todo
 

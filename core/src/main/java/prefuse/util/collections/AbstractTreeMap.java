@@ -511,7 +511,9 @@ public abstract class AbstractTreeMap implements IntSortedMap {
         }
 
         public boolean hasNext() {
-            return next != end;
+//            return next != end;
+// FIX for #3048039 (http://sourceforge.net/tracker/?func=detail&aid=3048039&group_id=98962&atid=622645)
+			return !next.equals(end);
         }
 
         final Entry nextEntry() {
