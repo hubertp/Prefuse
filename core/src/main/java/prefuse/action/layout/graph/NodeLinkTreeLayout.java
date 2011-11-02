@@ -259,6 +259,10 @@ public class NodeLinkTreeLayout extends TreeLayout {
         secondWalk(root, null, -rp.prelim, 0);
     }
 
+    protected Graph getGraph() {
+      return (Graph)m_vis.getGroup(m_group);
+    }
+
     private void firstWalk(NodeItem n, int num, int depth) {
         Params np = getParams(n);
         np.number = num;

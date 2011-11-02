@@ -360,7 +360,7 @@ public class LabelRenderer extends AbstractShapeRenderer {
      * Helper method, which calculates the top-left co-ordinate of an item
      * given the item's alignment.
      */
-    protected static void getAlignedPoint(Point2D p, VisualItem item, 
+    static void getAlignedPoint(Point2D p, VisualItem item, 
             double w, double h, int xAlign, int yAlign)
     {
         double x = item.getX(), y = item.getY();
