@@ -37,7 +37,7 @@ public class NodeLinkTreeLayout extends TreeLayout {
     private double m_dspace = 50;  // the spacing between depth levels
     private double m_offset = 50;  // pixel offset for root node position
     
-    private double[] m_depths = new double[10];
+    protected double[] m_depths = new double[10];
     private int      m_maxDepth = 0;
     
     private double m_ax, m_ay; // for holding anchor co-ordinates
@@ -206,7 +206,7 @@ public class NodeLinkTreeLayout extends TreeLayout {
         return m_tmpa;
     }
     
-    private double spacing(NodeItem l, NodeItem r, boolean siblings) {
+    protected double spacing(NodeItem l, NodeItem r, boolean siblings) {
         boolean w = ( m_orientation == Constants.ORIENT_TOP_BOTTOM ||
                       m_orientation == Constants.ORIENT_BOTTOM_TOP );
         return (siblings ? m_bspace : m_tspace) + 0.5 *
@@ -214,7 +214,7 @@ public class NodeLinkTreeLayout extends TreeLayout {
                 : l.getBounds().getHeight() + r.getBounds().getHeight() );
     }
     
-    private void updateDepths(int depth, NodeItem item) {
+    protected void updateDepths(int depth, NodeItem item) {
         boolean v = ( m_orientation == Constants.ORIENT_TOP_BOTTOM ||
                       m_orientation == Constants.ORIENT_BOTTOM_TOP );
         double d = ( v ? item.getBounds().getHeight() 
@@ -263,7 +263,7 @@ public class NodeLinkTreeLayout extends TreeLayout {
       return (Graph)m_vis.getGroup(m_group);
     }
 
-    private void firstWalk(NodeItem n, int num, int depth) {
+    protected void firstWalk(NodeItem n, int num, int depth) {
         Params np = getParams(n);
         np.number = num;
         updateDepths(depth, n);
@@ -305,7 +305,7 @@ public class NodeLinkTreeLayout extends TreeLayout {
         }
     }
     
-    private NodeItem apportion(NodeItem v, NodeItem a) {        
+    protected NodeItem apportion(NodeItem v, NodeItem a) {        
         NodeItem w = (NodeItem)v.getPreviousSibling();
         if ( w != null ) {
             NodeItem vip, vim, vop, vom;
@@ -358,19 +358,19 @@ public class NodeLinkTreeLayout extends TreeLayout {
         return a;
     }
     
-    private NodeItem nextLeft(NodeItem n) {
+    protected NodeItem nextLeft(NodeItem n) {
         NodeItem c = null;
         if ( n.isExpanded() ) c = (NodeItem)n.getFirstChild();
         return ( c != null ? c : getParams(n).thread );
     }
     
-    private NodeItem nextRight(NodeItem n) {
+    protected NodeItem nextRight(NodeItem n) {
         NodeItem c = null;
         if ( n.isExpanded() ) c = (NodeItem)n.getLastChild();
         return ( c != null ? c : getParams(n).thread );
     }
     
-    private void moveSubtree(NodeItem wm, NodeItem wp, double shift) {
+    protected void moveSubtree(NodeItem wm, NodeItem wp, double shift) {
         Params wmp = getParams(wm);
         Params wpp = getParams(wp);
         double subtrees = wpp.number - wmp.number;
@@ -381,7 +381,7 @@ public class NodeLinkTreeLayout extends TreeLayout {
         wpp.mod += shift;
     }
     
-    private void executeShifts(NodeItem n) {
+    protected void executeShifts(NodeItem n) {
         double shift = 0, change = 0;
         for ( NodeItem c = (NodeItem)n.getLastChild();
               c != null; c = (NodeItem)c.getPreviousSibling() )
@@ -394,7 +394,7 @@ public class NodeLinkTreeLayout extends TreeLayout {
         }
     }
     
-    private NodeItem ancestor(NodeItem vim, NodeItem v, NodeItem a) {
+    protected NodeItem ancestor(NodeItem vim, NodeItem v, NodeItem a) {
         NodeItem p = (NodeItem)v.getParent();
         Params vimp = getParams(vim);
         if ( vimp.ancestor.getParent() == p ) {
@@ -404,7 +404,7 @@ public class NodeLinkTreeLayout extends TreeLayout {
         }
     }
     
-    private void secondWalk(NodeItem n, NodeItem p, double m, int depth) {
+    protected void secondWalk(NodeItem n, NodeItem p, double m, int depth) {
         Params np = getParams(n);
         setBreadth(n, p, np.prelim + m);
         setDepth(n, p, m_depths[depth]);
@@ -421,7 +421,7 @@ public class NodeLinkTreeLayout extends TreeLayout {
         np.clear();
     }
     
-    private void setBreadth(NodeItem n, NodeItem p, double b) {
+    protected void setBreadth(NodeItem n, NodeItem p, double b) {
         switch ( m_orientation ) {
         case Constants.ORIENT_LEFT_RIGHT:
         case Constants.ORIENT_RIGHT_LEFT:
@@ -436,7 +436,7 @@ public class NodeLinkTreeLayout extends TreeLayout {
         }
     }
     
-    private void setDepth(NodeItem n, NodeItem p, double d) {
+    protected void setDepth(NodeItem n, NodeItem p, double d) {
         switch ( m_orientation ) {
         case Constants.ORIENT_LEFT_RIGHT:
             setX(n, p, m_ax + d);
@@ -474,7 +474,7 @@ public class NodeLinkTreeLayout extends TreeLayout {
         ts.addColumns(PARAMS_SCHEMA);
     }
     
-    private Params getParams(NodeItem item) {
+    protected Params getParams(NodeItem item) {
         Params rp = (Params)item.get(PARAMS);
         if ( rp == null ) {
             rp = new Params();
@@ -486,28 +486,6 @@ public class NodeLinkTreeLayout extends TreeLayout {
         return rp;
     }
     
-    /**
-     * Wrapper class holding parameters used for each node in this layout.
-     */
-    public static class Params implements Cloneable {
-        double prelim;
-        double mod;
-        double shift;
-        double change;
-        int    number = -2;
-        NodeItem ancestor = null;
-        NodeItem thread = null;
-        
-        public void init(NodeItem item) {
-            ancestor = item;
-            number = -1;
-        }
-        
-        public void clear() {
-            number = -2;
-            prelim = mod = shift = change = 0;
-            ancestor = thread = null;
-        }
-    }
+
     
 } // end of class NodeLinkTreeLayout
